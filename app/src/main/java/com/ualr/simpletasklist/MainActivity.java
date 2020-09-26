@@ -3,8 +3,13 @@ package com.ualr.simpletasklist;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.ualr.simpletasklist.databinding.ActivityMainBinding;
+import com.ualr.simpletasklist.model.Task;
+import com.ualr.simpletasklist.model.TaskList;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -12,6 +17,14 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
 
     // TODO 05. Add a TaskList member to the MainActivity. Initialize the new member.
+    private TaskList Tasks;
+
+    private EditText editTextTextPersonName;
+    private EditText taskList;
+    private EditText editTextTaskId;
+    private ImageView add_btn;
+    private Button deleteBtn;
+    private Button clearBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,12 +34,13 @@ public class MainActivity extends AppCompatActivity {
 
         //TODO 06.02 Bind the onAddBtnClicked method to the add button, so the onAddBtnClicked is
         // triggered whenever the user clicks on that button
-
+        this.add_btn = findViewById(R.id.add_btn);
         //TODO 07.02 Bind the onDeleteBtnClicked method to the delete button, so that method is
         // triggered whenever the user clicks on that button
-
+        this.deleteBtn = findViewById(R.id.deleteBtn);
         //TODO 08.02 Bind the onDoneBtnClicked method to the done button, so the onDoneBtnClicked method is
         // triggered whenever the user clicks on that button
+        this.clearBtn = findViewById(R.id.clearBtn);
     }
 
 
@@ -34,7 +48,11 @@ public class MainActivity extends AppCompatActivity {
     //  through the text field on the top of the screen by tapping the "+" on the right
 
     // TODO 06.01. Create a new method called onAddBtnClicked.
-
+    private void onAddBtnClicked() {
+        String taskId = this.editTextTextPersonName.getText().toString();
+        if (taskId.isEmpty()) return;
+        this.Tasks.add(taskId);
+    }
     // TODO 06.05. Invoke TaskList class' add method to ask the TaskList to
     //  add a new Task with the description provided through the text field.
 
@@ -45,7 +63,11 @@ public class MainActivity extends AppCompatActivity {
     // TODO 07. Create a new functionality to delete a task from the task list
 
     // TODO 07.01. Create a new method called onDeleteBtnClicked.
-
+    private void onDeleteBtnClicked() {
+        String taskDescription = this.editTextTaskId.getText().toString();
+        if (taskDescription.isEmpty()) return;
+        this.Tasks.delete(taskDescription);
+    }
     // TODO 07.04. Invoke TaskList class' delete method to ask the TaskList to
     //  delete a Task given the id provided through the text field on the bottom.
 
@@ -56,7 +78,11 @@ public class MainActivity extends AppCompatActivity {
     // TODO 08. Create a new functionality to mark a task as done.
 
     // TODO 08.01. Create a new method called onDoneBtnClicked
-
+    private void onDoneBtnClicked() {
+        String taskId = this.editTextTaskId.getText().toString();
+        if (taskId.isEmpty()) return;
+        this.Tasks.markDone(taskId);
+    }
     // TODO 08.04. Invoke TaskList class' markDone method to ask the TaskList to
     //  mark a Task given the id provided through the text field on the bottom.
 
