@@ -27,9 +27,4 @@ public class Task {
         this.taskStatus = taskStatus;
     }
 
-    public String toString() {
-        String output = "";
-            output = getTaskDescription() + " " + getTaskStatus();
-        return output;
-    }
 }

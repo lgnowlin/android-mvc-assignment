@@ -1,5 +1,7 @@
 package com.ualr.simpletasklist.model;
 
+import android.widget.TextView;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -17,7 +19,7 @@ public class TaskList {
     public TaskList() {
         this.tasks = new HashMap<>();
     }
-    public HashMap<Integer, Task> getTasks() {
+    public HashMap<Integer, Task> getTasks(int id) {
         return tasks;
     }
     public void setTasks(HashMap<Integer, Task> tasks) {
@@ -36,10 +38,8 @@ public class TaskList {
     public String toString(){
         Iterator<Map.Entry<Integer, Task>> it = tasks.entrySet().iterator();
         String output = "";
-        while (it.hasNext()) {
-            Map.Entry<Integer, Task> pair = it.next();
-            output = output.concat("\n"+ tasks.get(it)+ " - " + Task);
-        }
+        for (HashMap.Entry<Integer,Task> entry : tasks.entrySet())
+            output = output.concat("\n" + "-" + entry.getValue());
         return output;
     }
 
