@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class TaskList {
-    public Task Task;
+
     // TODO 03. Define TaskList's attributes. The class will have just one attribute to store all
     //  the tasks created by the user.
     private HashMap<Integer, Task> tasks = new HashMap<Integer, Task>();
@@ -19,7 +19,7 @@ public class TaskList {
     public TaskList() {
         this.tasks = new HashMap<>();
     }
-    public HashMap<Integer, Task> getTasks(int id) {
+    public HashMap<Integer, Task> getTasks() {
         return tasks;
     }
     public void setTasks(HashMap<Integer, Task> tasks) {
@@ -28,18 +28,22 @@ public class TaskList {
 
     // TODO 06.03. Define a new method called "add" that, given a task description, will create a
     //  new task and add it to the task list.
-    public void add(Integer taskId, String taskDescription, String taskStatus){
+    public void add(Integer taskId, String taskDescription, Boolean taskStatus){
         tasks.put(taskId, new Task(taskDescription,taskStatus));
     }
     // TODO 06.04. Define a new "toString" method that provides a formatted string with all the tasks in the task list.
     // Format: 1 line per task. Each line should start with the id number of the task, then a dash, and the task description right after that.
     // If the task is marked as done, "Done" should be included at the end of the line
-    @Override
+
     public String toString(){
         Iterator<Map.Entry<Integer, Task>> it = tasks.entrySet().iterator();
         String output = "";
-        for (HashMap.Entry<Integer,Task> entry : tasks.entrySet())
-            output = output.concat("\n" + "-" + entry.getValue());
+        for (HashMap.Entry<Integer,Task> entry : tasks.entrySet()){
+            if(entry.getValue().isDoneOrNot() == false)
+            output = output.concat("\n" + entry.getKey() + "-" + ((Task)entry.getValue()).getTaskDescription());
+            else if (entry.getValue().isDoneOrNot() == true)
+                output = output.concat("\n" + entry.getKey() + "-" + ((Task)entry.getValue()).getTaskDescription() + " Done");
+        }
         return output;
     }
 
@@ -51,7 +55,7 @@ public class TaskList {
     // TODO 08.03. Define a new method called "markDone" that, given a task id, will mark the
     //  corresponding task as done.
     public void markDone(Integer taskId){
-        String taskStatus = "Done";
-        this.Task.setTaskStatus(taskStatus);
+        Boolean doneOrNot = true;
+        tasks.get(taskId).setDoneOrNot(doneOrNot);
     }
 }

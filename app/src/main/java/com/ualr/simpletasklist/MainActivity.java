@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
     private void onAddBtnClicked() {
         ++taskId;
         String taskDescription = this.editTextTextPersonName.getText().toString();
-        String taskStatus = "";
+        Boolean taskStatus = false;
         if (taskDescription.isEmpty()) return;
         this.Tasks.add(taskId,taskDescription, taskStatus);
         this.taskList.setText(Tasks.toString());
