@@ -35,10 +35,13 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        Tasks = new TaskList();
+
         //TODO 06.02 Bind the onAddBtnClicked method to the add button, so the onAddBtnClicked is
         // triggered whenever the user clicks on that button
         this.editTextTextPersonName = findViewById(R.id.editTextTextPersonName);
         this.editTextTaskId = findViewById(R.id.editTextTaskId);
+        this.taskList = findViewById(R.id.taskList);
 
         this.add_btn = findViewById(R.id.add_btn);
         this.deleteBtn = findViewById(R.id.deleteBtn);
@@ -87,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
     // TODO 06.06. Use TaskList class' toString method to get a string with the formatted task list
     //  and display it on screen in the TextView with the id "textView"
 
-
     // TODO 07. Create a new functionality to delete a task from the task list
 
     // TODO 07.01. Create a new method called onDeleteBtnClicked.
@@ -96,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
         Integer taskId = Integer.parseInt((taskIdentification));
         if (taskIdentification.isEmpty()) return;
         this.Tasks.delete(taskId);
+        this.taskList.setText(Tasks.toString());
     }
     // TODO 07.04. Invoke TaskList class' delete method to ask the TaskList to
     //  delete a Task given the id provided through the text field on the bottom.
@@ -112,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
         Integer taskId = Integer.parseInt((taskIdentification));
         if (taskIdentification.isEmpty()) return;
         this.Tasks.markDone(taskId);
+        this.taskList.setText(Tasks.toString());
     }
     // TODO 08.04. Invoke TaskList class' markDone method to ask the TaskList to
     //  mark a Task given the id provided through the text field on the bottom.
